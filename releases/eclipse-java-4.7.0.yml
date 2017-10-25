@@ -1,6 +1,6 @@
 url: https://ftp.heanet.ie/mirrors/eclipse/technology/epp/downloads/release/oxygen/R/eclipse-java-oxygen-R-linux-gtk-x86_64.tar.gz
 filename: eclipse-java-oxygen-R-linux-gtk-x86_64.tar.gz
-basename: owsi-eclipse-jee-oxygen-4.7.0-linux-gtk
+basename: owsi-eclipse-java-oxygen-4.7.0-linux-gtk
 
 features:
   - org.jboss.tools.vpe.feature.feature.group
