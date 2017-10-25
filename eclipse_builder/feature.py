@@ -46,11 +46,10 @@ def install_features(eclipse_home, features, repositories, java_home=None,
     ]
     print(installed_features)
 
-    to_install_features = [feature for feature in features]
-    to_uninstall_features = [
-        feature for feature in features
-        if feature in installed_features
-    ]
+    to_install_features = set()
+    to_install_features = set([feature for feature in features])
+    to_uninstall_features = set(installed_features)
+    to_install_features.update(to_uninstall_features)
     print("installing %s" % (' '.join(to_install_features),))
     print("uninstalling %s" % (' '.join(to_uninstall_features),))
 
