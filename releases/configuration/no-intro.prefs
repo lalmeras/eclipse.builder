@@ -1,0 +1,3 @@
+# Skip de la perspective d'introduction
+
+org.eclipse.ui/showIntro=false

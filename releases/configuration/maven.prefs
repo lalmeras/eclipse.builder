@@ -1,0 +1,8 @@
+# Désactive la récupération des index au démarrage
+# Met à jour les projets Maven au démarrage
+# Ouverture des poms dans l'édition XML par défaut
+
+org.eclipse.m2e.core/eclipse.m2.updateIndexes=false
+org.eclipse.m2e.core/eclipse.m2.updateProjects=true
+org.eclipse.m2e.core/eclipse.m2.defaultPomEditorPage=true
+org.jboss.tools.maven.apt/org.jboss.tools.maven.apt.mode=maven_execution

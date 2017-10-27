@@ -1,0 +1,5 @@
+# Répond oui pour les rapports JBoss (pour le plugin freemarker)
+
+/configuration/org.jboss.tools.usage/first_visit=1315151945834
+/configuration/org.jboss.tools.usage/allow_usage_report_preference=true
+/configuration/org.jboss.tools.usage/ask_user_for_usage_report_preference=false

@@ -1,0 +1,10 @@
+# Switch automatique lors du Synchronize
+
+org.eclipse.team.ui/org.eclipse.team.ui.first_time=false
+org.eclipse.team.cvs.ui/pref_first_startup=false
+org.eclipse.team.svn.ui.prefs:firstStartup=false
+org.eclipse.team.svn.ui/preference.decoration.use.fontdecor=true
+org.eclipse.team.ui/org.eclipse.team.ui.sychronizing_default_perspective_to_show=always
+
+org.eclipse.ui.editors/quickdiff.defaultProvider=org.eclipse.team.svn.ui.annotate.SVNTeamQuickDiffProvider
+

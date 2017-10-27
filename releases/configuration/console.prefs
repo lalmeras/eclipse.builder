@@ -1,0 +1,3 @@
+
+org.eclipse.debug.ui/Console.highWaterMark=801000
+org.eclipse.debug.ui/Console.lowWaterMark=800000

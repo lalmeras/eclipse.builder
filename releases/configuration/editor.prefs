@@ -1,0 +1,9 @@
+# Personnalisation de l'éditeur pour
+# - affichage des numéros de ligne
+# - affichage d'une marge à 120
+# - affichage des caractères non imprimables
+
+org.eclipse.ui.editors/lineNumberRuler=true
+org.eclipse.ui.editors/printMargin=true
+org.eclipse.ui.editors/printMarginColumn=120
+org.eclipse.ui.editors/showWhitespaceCharacters=true

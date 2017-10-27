@@ -1,0 +1,4 @@
+org.eclipse.ui.workbench/org.eclipse.jface.bannerfont=1|DejaVu Sans|9.0|1|GTK|1|;
+org.eclipse.ui.workbench/org.eclipse.jface.headerfont=1|DejaVu Sans|11.0|1|GTK|1|;
+org.eclipse.ui.workbench/org.eclipse.jface.textfont=1|DejaVu Sans Mono|9.0|0|GTK|1|;
+org.eclipse.ui.workbench/org.eclipse.ui.workbench.texteditor.blockSelectionModeFont=1|DejaVu Sans Mono|9.0|0|GTK|1|;
