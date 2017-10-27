@@ -6,6 +6,9 @@ import os.path
 import subprocess
 
 
+PROTECTED_FEATURES = set(['epp.package.java'])
+
+
 def install_features(eclipse_home, features, repositories, java_home=None,
                      proxy_host=None, proxy_port=3128):
     """Install features in an Eclipse instance"""
@@ -48,7 +51,7 @@ def install_features(eclipse_home, features, repositories, java_home=None,
 
     to_install_features = set()
     to_install_features = set([feature for feature in features])
-    to_uninstall_features = set(installed_features)
+    to_uninstall_features = set(installed_features) - PROTECTED_FEATURES
     to_install_features.update(to_uninstall_features)
     print("installing %s" % (' '.join(to_install_features),))
     print("uninstalling %s" % (' '.join(to_uninstall_features),))

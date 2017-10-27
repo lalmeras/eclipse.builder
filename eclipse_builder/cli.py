@@ -42,6 +42,7 @@ def main(specfile, workdir, java_home, proxy_host, proxy_port):
                              java_home=java_home)
     prefs.install_preferences(target, os.path.dirname(specfile.name),
                               spec['prefs'])
+    util.archive(target, spec['basename'], spec['filename'])
 
 
 if __name__ == "__main__":

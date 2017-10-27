@@ -3,6 +3,7 @@ from __future__ import print_function
 
 import os.path
 import shutil
+import subprocess
 import sys
 import tempfile
 
@@ -55,3 +56,13 @@ def extract(tarobj, target):
                     os.chmod(target_item, member.mode)
                 else:
                     print('{} ignored during extraction'.format(member.name))
+
+
+def archive(eclipse_home, basename, archive_file):
+    """Compress en archive target"""
+    args = [
+        'tar', '-czf', archive_file,
+        '--transform', 's@^@{}/@'.format(basename),
+        '-C', eclipse_home, '.'
+    ]
+    subprocess.check_call(args)
