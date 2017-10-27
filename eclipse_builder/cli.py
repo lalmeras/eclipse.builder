@@ -11,6 +11,7 @@ import ruamel.yaml
 
 from . import util
 from . import feature
+from . import prefs
 
 @click.command()
 @click.option('--workdir', type=click.Path(
@@ -39,6 +40,8 @@ def main(specfile, workdir, java_home, proxy_host, proxy_port):
     feature.install_features(target, spec['features'], spec['repositories'],
                              proxy_host=proxy_host, proxy_port=proxy_port,
                              java_home=java_home)
+    prefs.install_preferences(target, os.path.dirname(specfile.name),
+                              spec['prefs'])
 
 
 if __name__ == "__main__":

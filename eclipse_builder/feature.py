@@ -25,7 +25,7 @@ def install_features(eclipse_home, features, repositories, java_home=None,
             '-vm', os.path.join(java_home, 'bin', 'java')
         ])
     # vmargs must be preceded by -vmargs
-    if len(vmargs) > 0:
+    if vmargs:
         vmargs.insert(0, '-vmargs')
     eclipse_bin = os.path.join(os.path.abspath(eclipse_home), 'eclipse')
 
@@ -40,9 +40,9 @@ def install_features(eclipse_home, features, repositories, java_home=None,
         line.split('/')[0]
         for line in subprocess.check_output(list_args).splitlines()
         if line
-            and 'org.eclipse.m2e.logback.configuration' not in line
-            and 'Operation completed' not in line
-            and '/' in line
+        and 'org.eclipse.m2e.logback.configuration' not in line
+        and 'Operation completed' not in line
+        and '/' in line
     ]
     print(installed_features)
 
@@ -63,3 +63,12 @@ def install_features(eclipse_home, features, repositories, java_home=None,
     args.extend(vm)
     args.extend(vmargs)
     subprocess.check_call(args)
+
+    clean_args = [
+        eclipse_bin,
+        '-nosplash', '-application',
+        'org.eclipse.equinox.p2.garbagecollector.application',
+    ]
+    clean_args.extend(vm)
+    clean_args.extend(vmargs)
+    subprocess.check_call(clean_args)

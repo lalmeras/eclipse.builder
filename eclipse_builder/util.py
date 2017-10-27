@@ -44,12 +44,14 @@ def extract(tarobj, target):
         if '/' in member.name:
             splitted = os.path.join(*member.name.split('/')[1:])
             target_item = os.path.join(target, splitted)
-            if member.isreg():
-                with open(target_item, 'w') as target_file:
-                    shutil.copyfileobj(tarobj.extractfile(member), target_file)
-                    os.chmod(target_file.name, member.mode)
-            elif member.isdir():
-                os.mkdir(target_item)
-                os.chmod(target_item, member.mode)
-            else:
-                print('{} ignored during extraction'.format(member.name))
+            if not os.path.exists(target_item):
+                if member.isreg():
+                    with open(target_item, 'w') as target_file:
+                        shutil.copyfileobj(tarobj.extractfile(member),
+                                           target_file)
+                        os.chmod(target_file.name, member.mode)
+                elif member.isdir():
+                    os.mkdir(target_item)
+                    os.chmod(target_item, member.mode)
+                else:
+                    print('{} ignored during extraction'.format(member.name))
