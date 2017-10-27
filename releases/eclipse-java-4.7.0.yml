@@ -45,3 +45,6 @@ repositories:
   - https://repository.takari.io/content/sites/m2e.extras/m2eclipse-egit/0.15.0/N/LATEST
   - http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-apt
   - http://eclipse.jeeeyul.net/update/
+
+prefs:
+  - configuration/*.prefs
