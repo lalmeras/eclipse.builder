@@ -6,7 +6,10 @@ import os.path
 import subprocess
 
 
-PROTECTED_FEATURES = set(['epp.package.java'])
+PROTECTED_FEATURES = set([
+    'epp.package.java',
+    'epp.package.rcp'
+])
 
 
 def install_features(eclipse_home, features, repositories, java_home=None,
