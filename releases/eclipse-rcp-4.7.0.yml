@@ -1,0 +1,30 @@
+url: https://ftp.heanet.ie/mirrors/eclipse/technology/epp/downloads/release/oxygen/R/eclipse-rcp-oxygen-R-linux-gtk-x86_64.tar.gz
+filename: eclipse-rcp-extra-oxygen-R-linux-gtk-x86_64.tar.gz
+basename: eclipse-rcp-extra-oxygen-4.7.0-linux-gtk
+
+features:
+  - org.eclipse.egit
+  - org.eclipse.m2e.feature.feature.group
+  - org.eclipse.m2e.logback.feature.feature.group
+  - org.eclipse.m2e.wtp.feature.feature.group
+  - org.sonatype.m2e.egit.feature.feature.group
+  - net.jeeeyul.eclipse.themes.feature.feature.group
+
+repositories:
+  - http://download.eclipse.org/webtools/repository/oxygen/
+  - http://download.eclipse.org/releases/oxygen/
+  - http://download.eclipse.org/eclipse/updates/4.7/
+  - http://marketplace.eclipse.org/repo/
+  - http://download.eclipse.org/technology/m2e/releases/
+  - http://download.eclipse.org/m2e-wtp/releases/oxygen/
+  - http://download.eclipse.org/releases/oxygen
+  - http://download.eclipse.org/buildship/updates/e47/releases/2.x/
+  - http://community.polarion.com/projects/subversive/download/eclipse/6.0/update-site/
+  - http://download.jboss.org/jbosstools/updates/webtools/oxygen/
+  - http://download.eclipse.org/technology/subversive/6.0/update-site/
+  - https://repository.takari.io/content/sites/m2e.extras/m2eclipse-egit/0.15.0/N/LATEST
+  - http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-apt
+  - http://eclipse.jeeeyul.net/update/
+
+prefs:
+  - configuration/*.prefs
