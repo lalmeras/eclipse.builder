@@ -29,8 +29,6 @@ def install_preferences(eclipse_home, conf_path, prefs):
     plugins = ET.parse(os.path.join(eclipse_home, 'artifacts.xml'))
     products = plugins.findall("/artifacts/artifact[@id='{}']"
                                .format(product_match))
-    import ipdb
-    ipdb.set_trace()
     if not products:
         raise Exception('Product xml {} not found'.format(product_match))
     folder_match = '{}_{}'.format(product_match, products[0].get('version'))
