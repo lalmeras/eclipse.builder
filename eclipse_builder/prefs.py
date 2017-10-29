@@ -5,7 +5,10 @@ from __future__ import print_function
 import glob
 import os
 import shutil
-import xml.etree.ElementTree as ET
+import subprocess
+import tempfile
+import lxml.etree as ET
+import zipfile
 
 
 def install_preferences(eclipse_home, conf_path, prefs):
@@ -27,7 +30,7 @@ def install_preferences(eclipse_home, conf_path, prefs):
         raise Exception('Eclipse product does not end with .product')
     product_match = product[0:-len('.product')]
     plugins = ET.parse(os.path.join(eclipse_home, 'artifacts.xml'))
-    products = plugins.findall("/artifacts/artifact[@id='{}']"
+    products = plugins.findall("./artifacts/artifact[@id='{}']"
                                .format(product_match))
     if not products:
         raise Exception('Product xml {} not found'.format(product_match))
@@ -50,3 +53,36 @@ def install_preferences(eclipse_home, conf_path, prefs):
                     plugin_customization.flush()
                 else:
                     print('{} not found, ignored'.format(pref_match))
+
+    jdt_core_jar = 'org.eclipse.jdt.core'
+    jdt_core_jar_el = plugins.findall("./artifacts/artifact[@id='{}']"
+                                      .format(jdt_core_jar))
+    if not jdt_core_jar_el:
+        print('jdt_core_jar not found')
+        return
+    jdt_pattern = '{}_{}.jar'.format(jdt_core_jar, jdt_core_jar_el[0].get('version'))
+    jdt_matches = glob.glob(os.path.join(eclipse_home, 'plugins', jdt_pattern))
+    if len(jdt_matches) != 1:
+        print('{} candidate(s) found for jdt core, aborting'.format(len(jdt_matches)))
+        return
+    with zipfile.ZipFile(jdt_matches[0], mode='r') as jar:
+        plugin_xml_info = jar.getinfo('plugin.xml')
+        plugin_xml = jar.read(plugin_xml_info)
+    root = ET.fromstring(plugin_xml)
+    modified = False
+    for item in root.findall("./extension[@point='org.eclipse.core.contenttype.contentTypes']/content-type[@default-charset='ISO-8859-1']"):
+        item.set('default-charset', 'UTF-8')
+        modified = True
+    if not modified:
+        print("Content-type of Properties file cannot be updated")
+    tmp_plugin_xml_path = tempfile.mkdtemp()
+    tmp_plugin_xml_file = os.path.join(tmp_plugin_xml_path, 'plugin.xml')
+    with open(tmp_plugin_xml_file, 'w') as tmp_plugin_xml:
+        tmp_plugin_xml.write(ET.tostring(root, encoding='utf-8'))
+    args = [
+        'zip',
+        '-j',
+        jdt_matches[0],
+        tmp_plugin_xml_file
+    ]
+    subprocess.check_call(args)

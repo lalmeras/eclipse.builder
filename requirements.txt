@@ -5,3 +5,4 @@ CacheControl==0.12.3
 CacheControl[filecache]==0.12.3
 # needed by CacheControl
 lockfile==0.12.2
+lxml==4.1.0

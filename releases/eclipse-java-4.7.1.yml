@@ -1,13 +1,33 @@
-url: https://ftp.heanet.ie/mirrors/eclipse/technology/epp/downloads/release/oxygen/R/eclipse-rcp-oxygen-R-linux-gtk-x86_64.tar.gz
-filename: eclipse-rcp-extra-oxygen-R-linux-gtk-x86_64.tar.gz
-basename: eclipse-rcp-extra-oxygen-4.7.0-linux-gtk
+url: https://ftp.heanet.ie/mirrors/eclipse/technology/epp/downloads/release/oxygen/1/eclipse-java-oxygen-1-linux-gtk-x86_64.tar.gz
+filename: eclipse-java-extra-oxygen-1-linux-gtk-x86_64.tar.gz
+basename: eclipse-java-extra-oxygen-4.7.1-linux-gtk
 
 features:
+  - org.jboss.tools.vpe.feature.feature.group
+  - org.eclipse.wst.server_adapters.feature.feature.group
+  - org.eclipse.jst.server_ui.feature.feature.group
+  - org.eclipse.jst.server_adapters.ext.feature.feature.group
+  - org.eclipse.jst.server_adapters.feature.feature.group
+  - org.eclipse.jsf.feature.feature.group
+  - org.eclipse.wst.xsl.feature.feature.group
+  - org.eclipse.wst.web_ui.feature.feature.group
+  - org.eclipse.jst.web_ui.feature.feature.group
+  - org.eclipse.jst.enterprise_ui.feature.feature.group
+  - org.eclipse.jst.common.fproj.enablement.jdt.feature.group
+  - org.eclipse.wst.common.fproj.feature.group
+  - org.eclipse.datatools.sqldevtools.feature.feature.group
   - org.eclipse.egit
+  - org.eclipse.buildship.feature.group
   - org.eclipse.m2e.feature.feature.group
   - org.eclipse.m2e.logback.feature.feature.group
   - org.eclipse.m2e.wtp.feature.feature.group
+  - org.polarion.eclipse.team.svn.connector.feature.group
+  - org.polarion.eclipse.team.svn.connector.svnkit18.feature.group
+  - org.eclipse.team.svn.feature.group
+  - org.eclipse.team.svn.m2e.feature.group
   - org.sonatype.m2e.egit.feature.feature.group
+  - org.eclipse.epp.mpc.feature.group
+  - org.jboss.tools.maven.apt.feature.feature.group
   - net.jeeeyul.eclipse.themes.feature.feature.group
   - fr.openwide.eclipse.plugins.m2e.derived.feature.feature.group
 

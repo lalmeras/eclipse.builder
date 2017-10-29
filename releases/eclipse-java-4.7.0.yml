@@ -29,6 +29,7 @@ features:
   - org.eclipse.epp.mpc.feature.group
   - org.jboss.tools.maven.apt.feature.feature.group
   - net.jeeeyul.eclipse.themes.feature.feature.group
+  - fr.openwide.eclipse.plugins.m2e.derived.feature.feature.group
 
 repositories:
   - http://download.eclipse.org/webtools/repository/oxygen/
@@ -45,6 +46,7 @@ repositories:
   - https://repository.takari.io/content/sites/m2e.extras/m2eclipse-egit/0.15.0/N/LATEST
   - http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-apt
   - http://eclipse.jeeeyul.net/update/
+  - http://dl.likide.org/eclipse/repositories/m2.derived/
 
 prefs:
   - configuration/*.prefs

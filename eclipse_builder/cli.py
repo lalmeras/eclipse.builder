@@ -3,6 +3,7 @@
 from __future__ import print_function
 
 import os
+import shutil
 import tarfile
 import tempfile
 
@@ -37,11 +38,23 @@ def main(specfile, workdir, java_home, proxy_host, proxy_port):
         util.extract(tar, target)
     finally:
         tar.close()
+    configuration_folder = os.path.join(target, 'configuration')
+    configuration_protect = os.listdir(configuration_folder)
     feature.install_features(target, spec['features'], spec['repositories'],
                              proxy_host=proxy_host, proxy_port=proxy_port,
                              java_home=java_home)
     prefs.install_preferences(target, os.path.dirname(specfile.name),
                               spec['prefs'])
+    configuration_content = os.listdir(configuration_folder)
+    for content_item in configuration_content:
+        if content_item not in configuration_protect:
+            item_path = os.path.join(configuration_folder, content_item)
+            if os.path.isdir(item_path):
+                shutil.rmtree(item_path)
+            else:
+                os.remove(item_path)
+        else:
+            print('{} protected'.format(content_item))
     util.archive(target, spec['basename'], spec['filename'])
 
 

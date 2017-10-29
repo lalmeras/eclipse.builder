@@ -1,6 +1,6 @@
-url: https://ftp.heanet.ie/mirrors/eclipse/technology/epp/downloads/release/oxygen/R/eclipse-rcp-oxygen-R-linux-gtk-x86_64.tar.gz
-filename: eclipse-rcp-extra-oxygen-R-linux-gtk-x86_64.tar.gz
-basename: eclipse-rcp-extra-oxygen-4.7.0-linux-gtk
+url: https://ftp.heanet.ie/mirrors/eclipse/technology/epp/downloads/release/oxygen/1/eclipse-java-oxygen-1-linux-gtk-x86_64.tar.gz
+filename: eclipse-rcp-extra-oxygen-1-linux-gtk-x86_64.tar.gz
+basename: eclipse-rcp-extra-oxygen-4.7.1-linux-gtk
 
 features:
   - org.eclipse.egit
