@@ -1,5 +1,6 @@
-ruamel.yaml==0.15.34
+ruamel.yaml==0.15.33
 Click==6.0
+clickable==0.0.3
 requests==2.18.4
 CacheControl==0.12.3
 CacheControl[filecache]==0.12.3

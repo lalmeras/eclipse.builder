@@ -2,31 +2,58 @@
 """Console script for eclipse_builder."""
 from __future__ import print_function
 
+import logging
 import os
 import shutil
 import tarfile
 import tempfile
 
 import click
+from clickable.coloredlogs import bootstrap
 import ruamel.yaml
 
 from . import util
 from . import feature
 from . import prefs
 
+bootstrap()
+logger = logging.getLogger(__name__)
+
 @click.command()
-@click.option('--workdir', type=click.Path(
-    exists=False, file_okay=False, dir_okay=True, writable=True,
-    readable=True, resolve_path=True
-), default=os.getcwd())
-@click.option('--java-home', type=click.Path(
-    exists=True, file_okay=False, dir_okay=True, writable=False,
-    readable=True, resolve_path=True), default=None)
-@click.option('--proxy-host', type=click.STRING)
-@click.option('--proxy-port', type=click.INT)
-@click.argument('specfile', type=click.File(mode='r', encoding='UTF-8'))
+@click.option(
+    '--workdir',
+    type=click.Path(
+        exists=False, file_okay=False, dir_okay=True, writable=True,
+        readable=True, resolve_path=True
+    ),
+    help='directory used to extract and manipulate built eclipse instance',
+    default=os.getcwd())
+@click.option(
+    '--java-home',
+    type=click.Path(
+        exists=True, file_okay=False, dir_okay=True, writable=False,
+        readable=True, resolve_path=True),
+    help='java home used to launch eclipse',
+    default=None)
+@click.option(
+    '--proxy-host',
+    help='http proxy hostname',
+    type=click.STRING,
+    default=None)
+@click.option(
+    '--proxy-port',
+    help='http proxy port',
+    type=click.INT,
+    default=None)
+@click.argument(
+    'specfile',
+    type=click.File(mode='r', encoding='UTF-8'))
 def main(specfile, workdir, java_home, proxy_host, proxy_port):
-    """Console script for eclipse_builder."""
+    """
+    Console script for eclipse_builder.
+
+    * SPECFILE is yml description of the release.
+    """
     try:
         spec = ruamel.yaml.YAML(typ='safe').load(specfile)
     finally:
