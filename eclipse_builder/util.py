@@ -1,6 +1,8 @@
 """Utilities for Eclipse Builder"""
 from __future__ import print_function
 
+import datetime
+import logging
 import os.path
 import shutil
 import subprocess
@@ -11,23 +13,35 @@ import requests
 from cachecontrol import CacheControl
 from cachecontrol.caches.file_cache import FileCache
 
+logger = logging.getLogger(__name__)
 
 def download(workdir, url):
     """Download a file, using .cache inside workdir as an HTTP cache."""
+    logging.debug(u"initializing requests and cache-control")
     session = CacheControl(requests.Session(),
                            cache=FileCache(os.path.join(workdir, '.cache')))
     req = session.get(url, stream=True)
     try:
         downloaded_file = tempfile.TemporaryFile()
+        size = 0
+        start = datetime.datetime.now()
         for chunk in req.iter_content(chunk_size=1024000):
             if chunk:
                 sys.stdout.write('.')
                 sys.stdout.flush()
                 downloaded_file.write(chunk)
+                size += len(chunk)
+        # print newline
         print()
+        downloaded_file.flush()
+        logging.info(u"downloaded {} - {} o. in {} s.",
+                     url, size,
+                     (datetime.datetime.now() - start).total_seconds())
+        logging.debug(u"reset file pointer - seek(0)")
         downloaded_file.seek(0)
         return downloaded_file
     except Exception as exc:
+        logging.debug(u"error on download, closing and deleting file")
         downloaded_file.close()
         raise exc
 

@@ -7,17 +7,37 @@ import os
 import shutil
 import tarfile
 import tempfile
+import sys
 
 import click
 from clickable.coloredlogs import bootstrap
+import coloredlogs
 import ruamel.yaml
 
 from . import util
 from . import feature
 from . import prefs
 
-bootstrap()
-logger = logging.getLogger(__name__)
+
+def bootstrap():
+    logger_name = __package__
+    logger = logging.getLogger(logger_name)
+    stdout = logging.getLogger('.'.join(['stdout', logger_name]))
+    raw = logging.getLogger('.'.join(['raw', logger_name]))
+    logging.getLogger().addFilter(filter)
+    logger_format = '*** %(name)s %(levelname)-7s %(message)s'
+    stdout_format = '* %(levelname)-7s %(message)s'
+    raw_format = '%(message)s'
+    coloredlogs.install(level='DEBUG', logger=logger, fmt=logger_format)
+    coloredlogs.install(level='DEBUG', logger=stdout, fmt=stdout_format)
+    coloredlogs.install(level='DEBUG', logger=raw, fmt=raw_format)
+    logger.setLevel(logging.WARN)
+    stdout.setLevel(logging.INFO)
+    raw.setLevel(logging.INFO)
+    return logger, stdout, raw
+
+
+(root_logger, cli_logger, raw_logger) = bootstrap()
 
 @click.command()
 @click.option(
@@ -45,19 +65,31 @@ logger = logging.getLogger(__name__)
     help='http proxy port',
     type=click.INT,
     default=None)
+@click.option(
+    '-v', '--verbose', count=True
+)
 @click.argument(
     'specfile',
     type=click.File(mode='r', encoding='UTF-8'))
-def main(specfile, workdir, java_home, proxy_host, proxy_port):
+def main(specfile, workdir, java_home, proxy_host, proxy_port, verbose):
     """
     Console script for eclipse_builder.
 
     * SPECFILE is yml description of the release.
     """
+    if verbose >= 1:
+        cli_logger.setLevel(logging.INFO)
+        cli_logger.info("using INFO logging level")
     try:
+        cli_logger.info(u"using {} as specfile".format(specfile.name))
         spec = ruamel.yaml.YAML(typ='safe').load(specfile)
+    except:
+        cli_logger.critical(u"error loading specfile {}"
+                                .format(specfile.name),
+                            exc_info=True)
     finally:
         specfile.close()
+    cli_logger.info(u"downloading {}".format(spec['url']))
     archive = util.download(workdir, spec['url'])
     tar = tarfile.open(fileobj=archive)
     target = tempfile.mkdtemp(dir=workdir)
