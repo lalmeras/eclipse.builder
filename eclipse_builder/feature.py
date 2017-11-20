@@ -61,7 +61,7 @@ def install_features(eclipse_home, features, repositories, java_home=None,
 
     args = [
         eclipse_bin,
-        '-noSplash', '-application', 'org.eclipse.equinox.p2.director',
+        '-nosplash', '-application', 'org.eclipse.equinox.p2.director',
         '-repository', ','.join(repositories),
         '-installIU', ','.join(to_install_features),
         '-uninstallIU', ','.join(to_uninstall_features)
