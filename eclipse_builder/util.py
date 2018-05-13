@@ -13,13 +13,17 @@ import requests
 from cachecontrol import CacheControl
 from cachecontrol.caches.file_cache import FileCache
 
+from requests_testadapter import Resp
+
 logger = logging.getLogger(__name__)
+
 
 def download(workdir, url):
     """Download a file, using .cache inside workdir as an HTTP cache."""
     logging.debug(u"initializing requests and cache-control")
     session = CacheControl(requests.Session(),
                            cache=FileCache(os.path.join(workdir, '.cache')))
+    session.mount('file://', LocalFileAdapter())
     req = session.get(url, stream=True)
     try:
         downloaded_file = tempfile.TemporaryFile()
@@ -80,3 +84,20 @@ def archive(eclipse_home, basename, archive_file):
         '-C', eclipse_home, '.'
     ]
     subprocess.check_call(args)
+
+
+class LocalFileAdapter(requests.adapters.HTTPAdapter):
+    def build_response_from_file(self, request):
+        file_path = request.url[7:]
+        with open(file_path, 'rb') as file:
+            buff = bytearray(os.path.getsize(file_path))
+            file.readinto(buff)
+            resp = Resp(buff)
+            r = self.build_response(request, resp)
+
+            return r
+
+    def send(self, request, stream=False, timeout=None,
+             verify=True, cert=None, proxies=None):
+
+        return self.build_response_from_file(request)
