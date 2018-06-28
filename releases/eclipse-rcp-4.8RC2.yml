@@ -1,6 +1,6 @@
-url: file:///home/lalmeras/Téléchargements/eclipse-rcp-photon-RC1-linux-gtk-x86_64.tar.gz
-filename: eclipse-java-extra-photon-RC1-linux-gtk-x86_64.tar.gz
-basename: eclipse-java-extra-photon-4.8RC1-linux-gtk
+url: file:///home/lalmeras/Téléchargements/eclipse-rcp-photon-RC2-linux-gtk-x86_64.tar.gz
+filename: eclipse-rcp-extra-photon-RC2-linux-gtk-x86_64.tar.gz
+basename: eclipse-rcp-extra-photon-4.8RC2-linux-gtk
 
 features:
   - org.jboss.tools.vpe.feature.feature.group
@@ -25,8 +25,8 @@ features:
 #  - org.polarion.eclipse.team.svn.connector.svnkit18.feature.group
 #  - org.eclipse.team.svn.feature.group
 #  - org.eclipse.team.svn.m2e.feature.group
-# Broken for 4.8 RC1
-  - org.sonatype.m2e.egit.feature.feature.group
+# Broken for 4.8 RC2
+#  - org.sonatype.m2e.egit.feature.feature.group
   - org.eclipse.epp.mpc.feature.group
   - org.jboss.tools.maven.apt.feature.feature.group
   - net.jeeeyul.eclipse.themes.feature.feature.group
