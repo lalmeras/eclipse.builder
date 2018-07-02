@@ -1,0 +1,19 @@
+url: http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R/eclipse-rcp-photon-R-linux-gtk-x86_64.tar.gz
+filename: eclipse-rcp-extra-photon-linux-gtk-x86_64.tar.gz
+basename: eclipse-rcp-extra-photon-4.8-linux-gtk
+
+features:
+  - org.eclipse.egit
+  - org.eclipse.buildship.feature.group
+  - org.eclipse.m2e.feature.feature.group
+  - org.eclipse.m2e.logback.feature.feature.group
+  - fr.openwide.eclipse.plugins.m2e.derived.feature.feature.group
+
+repositories:
+  - http://download.eclipse.org/releases/photon/
+  - http://download.eclipse.org/eclipse/updates/4.8/
+  - http://marketplace.eclipse.org/repo/
+  - http://dl.likide.org/eclipse/repositories/m2.derived/
+
+prefs:
+  - configuration/*.prefs
