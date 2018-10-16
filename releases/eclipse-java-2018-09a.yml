@@ -1,6 +1,6 @@
 url: http://mirror.ibcp.fr/pub/eclipse//technology/epp/downloads/release/2018-09/R/eclipse-jee-2018-09-linux-gtk-x86_64.tar.gz
-filename: eclipse-java-extra-2018-09-linux-gtk-x86_64.tar.gz
-basename: eclipse-java-extra-2018-09-linux-gtk
+filename: eclipse-java-extra-2018-09a-linux-gtk-x86_64.tar.gz
+basename: eclipse-java-extra-2018-09a-linux-gtk
 
 features:
   - org.eclipse.wst.server_adapters.feature.feature.group
@@ -26,8 +26,7 @@ features:
 repositories:
   - http://download.eclipse.org/releases/2018-09
   - http://download.eclipse.org/eclipse/updates/4.9
-  - http://marketplace.eclipse.org/repo/
-  - http://download.eclipse.org/webtools/repository/photon
+  - http://download.eclipse.org/webtools/repository/2018-09
   - http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-apt
   - http://dl.likide.org/eclipse/repositories/m2.derived/
 
