@@ -24,7 +24,7 @@ test_requirements = [
 
 setup(
     name='eclipse_builder',
-    version='0.1.0',
+    version='0.1.1',
     description="Helpers to build custom Eclipse packages",
     long_description=readme + '\n\n' + history,
     author="Laurent Almeras",

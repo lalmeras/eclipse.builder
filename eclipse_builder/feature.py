@@ -8,7 +8,8 @@ import subprocess
 
 PROTECTED_FEATURES = set([
     'epp.package.java',
-    'epp.package.rcp'
+    'epp.package.rcp',
+    'epp.package.jee'
 ])
 
 
