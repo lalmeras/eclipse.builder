@@ -1,0 +1,21 @@
+---
+url: http://mirror.ibcp.fr/pub/eclipse//technology/epp/downloads/release/2018-09/R/eclipse-rcp-2018-09-linux-gtk-x86_64.tar.gz
+filename: eclipse-rcp-extra-2018-09b-linux-gtk-x86_64.tar.gz
+basename: eclipse-rcp-extra-2018-09b-linux-gtk
+
+features:
+  - org.eclipse.egit
+  - org.eclipse.buildship.feature.group
+  - org.eclipse.m2e.feature.feature.group
+  - org.eclipse.m2e.logback.feature.feature.group
+  - org.eclipse.m2e.wtp.feature.feature.group
+  - fr.openwide.eclipse.plugins.m2e.derived.feature.feature.group
+
+repositories:
+  - http://download.eclipse.org/releases/2018-09
+  - http://download.eclipse.org/eclipse/updates/4.9
+  - http://download.eclipse.org/webtools/repository/2018-09
+  - http://dl.likide.org/eclipse/repositories/m2.derived/
+
+prefs:
+  - configuration/*.prefs

@@ -1,0 +1,37 @@
+---
+# 4.8b uses an updated eclipse_builder with epp.package.jee feature protection
+# no change on release definition
+url: http://ftp.fau.de/eclipse/technology/epp/downloads/release/photon/R/eclipse-jee-photon-R-linux-gtk-x86_64.tar.gz
+filename: eclipse-java-extra-photon-4.8b-linux-gtk-x86_64.tar.gz
+basename: eclipse-java-extra-photon-4.8b-linux-gtk
+
+features:
+  - org.eclipse.wst.server_adapters.feature.feature.group
+  - org.eclipse.jst.server_ui.feature.feature.group
+  - org.eclipse.jst.server_adapters.ext.feature.feature.group
+  - org.eclipse.jst.server_adapters.feature.feature.group
+  - org.eclipse.jsf.feature.feature.group
+  - org.eclipse.wst.xsl.feature.feature.group
+  - org.eclipse.wst.web_ui.feature.feature.group
+  - org.eclipse.jst.web_ui.feature.feature.group
+  - org.eclipse.jst.enterprise_ui.feature.feature.group
+  - org.eclipse.jst.common.fproj.enablement.jdt.feature.group
+  - org.eclipse.wst.common.fproj.feature.group
+  - org.eclipse.datatools.sqldevtools.feature.feature.group
+  - org.eclipse.egit
+  - org.eclipse.buildship.feature.group
+  - org.eclipse.m2e.feature.feature.group
+  - org.eclipse.m2e.logback.feature.feature.group
+  - org.eclipse.m2e.wtp.feature.feature.group
+  - org.jboss.tools.maven.apt.feature.feature.group
+  - fr.openwide.eclipse.plugins.m2e.derived.feature.feature.group
+repositories:
+  - http://download.eclipse.org/releases/photon/
+  - http://download.eclipse.org/eclipse/updates/4.8/
+  # version must be set statically as jboss repo is not pinned to 4.8
+  # - http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-apt
+  - http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-apt/1.5.0-2018-05-16_00-46-30-H11/
+  - http://dl.likide.org/eclipse/repositories/m2.derived/
+
+prefs:
+  - configuration/*.prefs
