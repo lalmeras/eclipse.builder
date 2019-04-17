@@ -1,0 +1,34 @@
+url: http://mirror.ibcp.fr/pub/eclipse//technology/epp/downloads/release/2019-03/R/eclipse-jee-2019-03-R-linux-gtk-x86_64.tar.gz
+filename: eclipse-java-extra-2019-03a-linux-gtk-x86_64.tar.gz
+basename: eclipse-java-extra-2019-03a-linux-gtk
+
+features:
+  - org.eclipse.wst.server_adapters.feature.feature.group
+  - org.eclipse.jst.server_ui.feature.feature.group
+  - org.eclipse.jst.server_adapters.ext.feature.feature.group
+  - org.eclipse.jst.server_adapters.feature.feature.group
+  - org.eclipse.jsf.feature.feature.group
+  - org.eclipse.wst.xsl.feature.feature.group
+  - org.eclipse.wst.web_ui.feature.feature.group
+  - org.eclipse.jst.web_ui.feature.feature.group
+  - org.eclipse.jst.enterprise_ui.feature.feature.group
+  - org.eclipse.jst.common.fproj.enablement.jdt.feature.group
+  - org.eclipse.wst.common.fproj.feature.group
+  - org.eclipse.datatools.sqldevtools.feature.feature.group
+  - org.eclipse.egit
+  - org.eclipse.buildship.feature.group
+  - org.eclipse.m2e.feature.feature.group
+  - org.eclipse.m2e.logback.feature.feature.group
+  - org.eclipse.m2e.wtp.feature.feature.group
+  - org.jboss.tools.maven.apt.feature.feature.group
+  - fr.openwide.eclipse.plugins.m2e.derived.feature.feature.group
+
+repositories:
+  - https://download.eclipse.org/releases/2019-03/
+  - https://download.eclipse.org/eclipse/updates/4.12/
+  - http://download.eclipse.org/webtools/repository/2019-03/
+  - http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-apt
+  - http://dl.likide.org/eclipse/repositories/m2.derived/
+
+prefs:
+  - configuration/*.prefs
