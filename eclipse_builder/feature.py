@@ -4,6 +4,7 @@ from __future__ import print_function
 
 import os.path
 import subprocess
+import sys
 
 
 PROTECTED_FEATURES = set([
@@ -45,7 +46,9 @@ def install_features(eclipse_home, features, repositories, java_home=None,
     list_args.extend(vmargs)
     installed_features = [
         line.split('/')[0]
-        for line in subprocess.check_output(list_args).splitlines()
+        for line in subprocess.check_output(list_args)
+                              .decode(sys.stdout.encoding)
+                              .splitlines()
         if line
         and 'org.eclipse.m2e.logback.configuration' not in line
         and 'Operation completed' not in line

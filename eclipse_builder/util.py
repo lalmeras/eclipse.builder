@@ -65,7 +65,7 @@ def extract(tarobj, target):
             target_item = os.path.join(target, splitted)
             if not os.path.exists(target_item):
                 if member.isreg():
-                    with open(target_item, 'w') as target_file:
+                    with open(target_item, 'wb') as target_file:
                         shutil.copyfileobj(tarobj.extractfile(member),
                                            target_file)
                         os.chmod(target_file.name, member.mode)
