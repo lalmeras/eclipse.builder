@@ -78,7 +78,7 @@ def install_preferences(eclipse_home, conf_path, prefs):
     tmp_plugin_xml_path = tempfile.mkdtemp()
     tmp_plugin_xml_file = os.path.join(tmp_plugin_xml_path, 'plugin.xml')
     with open(tmp_plugin_xml_file, 'w') as tmp_plugin_xml:
-        tmp_plugin_xml.write(ET.tostring(root, encoding='utf-8'))
+        tmp_plugin_xml.write(ET.tostring(root, encoding='unicode'))
     args = [
         'zip',
         '-j',
