@@ -1,10 +1,9 @@
-ruamel.yaml==0.15.89
 Click==7.0
-clickable==0.3.0
 requests==2.18.4
 requests-testadapter
 CacheControl==0.12.3
 CacheControl[filecache]==0.12.3
 # needed by CacheControl
 lockfile==0.12.2
-lxml==4.4.1
+coloredlogs==15.0
+pyaml==20.4.0

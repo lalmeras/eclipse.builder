@@ -10,9 +10,8 @@ import tempfile
 import sys
 
 import click
-from clickable.coloredlogs import bootstrap
 import coloredlogs
-import ruamel.yaml
+import yaml
 
 from . import util
 from . import feature
@@ -82,7 +81,7 @@ def main(specfile, workdir, java_home, proxy_host, proxy_port, verbose):
         cli_logger.info("using INFO logging level")
     try:
         cli_logger.info(u"using {} as specfile".format(specfile.name))
-        spec = ruamel.yaml.YAML(typ='safe').load(specfile)
+        spec = yaml.safe_load(specfile)
     except:
         cli_logger.critical(u"error loading specfile {}"
                                 .format(specfile.name),

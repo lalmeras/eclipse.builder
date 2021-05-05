@@ -7,7 +7,7 @@ import os
 import shutil
 import subprocess
 import tempfile
-import lxml.etree as ET
+import xml.etree.ElementTree as ET
 import zipfile
 
 
