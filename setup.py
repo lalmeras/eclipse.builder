@@ -11,17 +11,6 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-with open('requirements.txt') as requirements_file:
-    requirements = requirements_file.read()
-
-setup_requirements = [
-    # TODO(lalmeras): put setup requirements (distutils extensions, etc.) here
-]
-
-test_requirements = [
-    # TODO: put package test requirements here
-]
-
 setup(
     name='eclipse_builder',
     version='0.1.1',
@@ -37,7 +26,15 @@ setup(
         ]
     },
     include_package_data=True,
-    install_requires=requirements,
+    install_requires=[
+        "Click==7.0",
+        "requests==2.18.4",
+        "CacheControl==0.12.3",
+        "CacheControl[filecache]==0.12.3",
+        "lockfile==0.12.2",
+        "coloredlogs==15.0",
+        "pyyaml==5.4.1"
+        ],
     license="MIT license",
     zip_safe=False,
     keywords='eclipse_builder',
@@ -55,6 +52,8 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
     test_suite='tests',
-    tests_require=test_requirements,
-    setup_requires=setup_requirements,
+    tests_require=[
+        "requests-testadapter"
+        ],
+    setup_requires=[]
 )

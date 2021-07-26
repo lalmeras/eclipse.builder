@@ -1,9 +1,0 @@
-Click==7.0
-requests==2.18.4
-requests-testadapter
-CacheControl==0.12.3
-CacheControl[filecache]==0.12.3
-# needed by CacheControl
-lockfile==0.12.2
-coloredlogs==15.0
-pyaml==20.4.0
