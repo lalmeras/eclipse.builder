@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "8711689dadf9ac8accb2fe83621e32db9abb83331cfc8136a2c116bef4447750"
+            "sha256": "39f24497540f77142a204dca34436f08bb74e7639b4ac819c30709e53add394c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -17,6 +17,9 @@
     },
     "default": {
         "cachecontrol": {
+            "extras": [
+                "filecache"
+            ],
             "hashes": [
                 "sha256:a9fc50e216c7c101f4ec4312f012dea501c2859cb256c7a68186a172ab71f632"
             ],
@@ -125,21 +128,6 @@
                 "sha256:9c443e7324ba5b85070c4a818ade28bfabedf16ea10206da1132edaa6dda237e"
             ],
             "version": "==2.18.4"
-        },
-        "requests-testadapter": {
-            "hashes": [
-                "sha256:0a9f824acc995753ca6f2e306fbbdb16015c8c44c1d14c9060717e32b99318b0"
-            ],
-            "index": "pypi",
-            "version": "==0.3.0"
-        },
-        "six": {
-            "hashes": [
-                "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926",
-                "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"
-            ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
-            "version": "==1.16.0"
         },
         "urllib3": {
             "hashes": [

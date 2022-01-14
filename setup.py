@@ -33,7 +33,8 @@ setup(
         "CacheControl[filecache]==0.12.3",
         "lockfile==0.12.2",
         "coloredlogs==15.0",
-        "pyyaml==5.4.1"
+        "pyyaml==5.4.1",
+        "requests-testadapter"
         ],
     license="MIT license",
     zip_safe=False,
