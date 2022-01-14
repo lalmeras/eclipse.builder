@@ -28,7 +28,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "Click==7.0",
-        "requests==2.18.4",
+        "requests==2.20.0",
         "CacheControl==0.12.3",
         "CacheControl[filecache]==0.12.3",
         "lockfile==0.12.2",
