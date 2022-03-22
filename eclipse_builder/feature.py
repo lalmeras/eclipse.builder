@@ -5,6 +5,25 @@ from __future__ import print_function
 import os.path
 import subprocess
 import sys
+import tempfile
+
+
+# eclipse 2022-03: httpclient is verbose if logback is not set
+LOGBACK_CONFIGURATION = """<configuration>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="warn">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>
+"""
 
 
 PROTECTED_FEATURES = set([
@@ -17,6 +36,14 @@ PROTECTED_FEATURES = set([
 def install_features(eclipse_home, features, repositories, java_home=None,
                      proxy_host=None, proxy_port=3128):
     """Install features in an Eclipse instance"""
+    with tempfile.NamedTemporaryFile('w', encoding='utf-8', delete=True, suffix='.xml') as logback:
+        logback.write(LOGBACK_CONFIGURATION)
+        logback.flush()
+        _install_features(logback.name, eclipse_home, features, repositories,
+                          java_home, proxy_host, proxy_port)
+
+def _install_features(logback_file, eclipse_home, features, repositories,
+                      java_home=None, proxy_host=None, proxy_port=3128):
     vmargs = []
     vm = []
     if proxy_host:
@@ -28,6 +55,8 @@ def install_features(eclipse_home, features, repositories, java_home=None,
             '-Dhttp.proxyPort=%s' % (proxy_port,),
             '-Dhttps.proxyPort=%s' % (proxy_port,)
         ])
+    if logback_file:
+        vmargs.append('-Dlogback.configurationFile={}'.format(logback_file))
     if java_home:
         vm.extend([
             '-vm', os.path.join(java_home, 'bin', 'java')
