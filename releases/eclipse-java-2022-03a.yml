@@ -21,7 +21,7 @@ features:
   - org.eclipse.m2e.logback.feature.feature.group
   - org.eclipse.m2e.wtp.feature.feature.group
   - org.jboss.tools.maven.apt.feature.feature.group
-    #  - fr.openwide.eclipse.plugins.m2e.derived.feature.feature.group
+  - fr.openwide.eclipse.plugins.m2e.derived.feature.feature.group
   - org.sonarlint.eclipse.feature.feature.group
   - org.eclipse.oomph.setup.git.feature.group
   - org.eclipse.oomph.setup.jdt.feature.group
