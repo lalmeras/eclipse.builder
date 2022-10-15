@@ -137,7 +137,7 @@ module = []
 ignore_missing_imports = true
 
 [tool.tbump.version]
-current = "0.1.1"
+current = "0.2.0"
 regex = '''
   (?P<major>\d+)
   \.
