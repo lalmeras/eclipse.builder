@@ -4,6 +4,8 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+eclipse-builder = {extras = ["test"], path = "."}
 
 [packages]
-eclipse-builder = {editable = true, path = "."}
+setuptools = ">= 64.0.0"
+eclipse-builder = {path = "."}
