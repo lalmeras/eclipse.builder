@@ -26,6 +26,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10"
 ]
 dependencies = [
+  "Click==8.0.4",
   "requests==2.27.1",
   "cachecontrol[filecache]==0.12.11",
   "lockfile==0.12.2",
