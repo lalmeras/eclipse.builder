@@ -28,6 +28,7 @@ classifiers = [
 dependencies = [
   "Click==8.0.4",
   "requests==2.27.1",
+  "requests-testadapter==0.3.0",
   "cachecontrol[filecache]==0.12.11",
   "lockfile==0.12.2",
   "coloredlogs==15.0",
@@ -44,7 +45,6 @@ changelog = "https://github.com/lalmeras/eclipse.builder/blob/dev/README.md"
 
 [project.optional-dependencies]
 test = [
-  "requests-testadapter",
   "tox",
   "mock>=2.0.0",
   "pexpect>=4.2.1",
