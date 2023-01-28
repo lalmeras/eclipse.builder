@@ -1,6 +1,10 @@
 url: http://mirror.dkm.cz/eclipse/technology/epp/downloads/release/2022-12/R/eclipse-jee-2022-12-R-linux-gtk-x86_64.tar.gz
 filename: eclipse-java-extra-2022-12b-linux-gtk-x86_64.tar.gz
 basename: eclipse-java-extra-2022-12b-linux-gtk
+version: 2022.12b
+#desktop:
+#  vm:
+#  vm-args:
 
 features:
   - org.eclipse.wst.server_adapters.feature.feature.group

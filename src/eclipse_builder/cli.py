@@ -4,6 +4,7 @@ from __future__ import print_function
 
 import logging
 import os
+import pathlib
 import shutil
 import tarfile
 import tempfile
@@ -16,6 +17,7 @@ import yaml
 from . import util
 from . import feature
 from . import prefs
+from . import nfpm
 
 
 def bootstrap():
@@ -38,7 +40,18 @@ def bootstrap():
 
 (root_logger, cli_logger, raw_logger) = bootstrap()
 
-@click.command()
+
+@click.group()
+@click.option(
+    '-v', '--verbose', count=True
+)
+def main(verbose):
+    if verbose >= 1:
+        cli_logger.setLevel(logging.INFO)
+        cli_logger.info("using INFO logging level")
+
+
+@main.command()
 @click.option(
     '--workdir',
     type=click.Path(
@@ -65,29 +78,28 @@ def bootstrap():
     type=click.INT,
     default=None)
 @click.option(
-    '-v', '--verbose', count=True
-)
+    '--rpm',
+    is_flag=True,
+    help='build rpm package',
+    type=click.BOOL,
+    default=False)
+@click.option(
+    '--deb',
+    is_flag=True,
+    help='build deb package',
+    type=click.BOOL,
+    default=False)
 @click.argument(
     'specfile',
     type=click.File(mode='r', encoding='UTF-8'))
-def main(specfile, workdir, java_home, proxy_host, proxy_port, verbose):
+def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
+        rpm: bool, deb: bool):
     """
     Console script for eclipse_builder.
 
     * SPECFILE is yml description of the release.
     """
-    if verbose >= 1:
-        cli_logger.setLevel(logging.INFO)
-        cli_logger.info("using INFO logging level")
-    try:
-        cli_logger.info(u"using {} as specfile".format(specfile.name))
-        spec = yaml.safe_load(specfile)
-    except:
-        cli_logger.critical(u"error loading specfile {}"
-                                .format(specfile.name),
-                            exc_info=True)
-    finally:
-        specfile.close()
+    spec = _load_spec(specfile)
     cli_logger.info(u"downloading {}".format(spec['url']))
     archive = util.download(workdir, spec['url'])
     tar = tarfile.open(fileobj=archive)
@@ -114,6 +126,57 @@ def main(specfile, workdir, java_home, proxy_host, proxy_port, verbose):
         else:
             print('{} protected'.format(content_item))
     util.archive(target, spec['basename'], spec['filename'])
+    if rpm or deb:
+        cli_logger.info(u"packaging...")
+        nfpm.build_package(target, spec, workdir, rpm, deb)
+
+
+@main.command()
+@click.option(
+    '--content',
+    type=click.Path(
+        exists=False, file_okay=False, dir_okay=True, writable=True,
+        readable=True, resolve_path=True
+    ),
+    help='Directory containing eclipse tree.')
+@click.option(
+    '--workdir',
+    type=click.Path(
+        exists=False, file_okay=False, dir_okay=True, writable=True,
+        readable=True, resolve_path=True
+    ),
+    help='directory used to extract and manipulate built eclipse instance',
+    default=os.getcwd())
+@click.option(
+    '--rpm',
+    is_flag=True,
+    help='build rpm package',
+    type=click.BOOL,
+    default=False)
+@click.option(
+    '--deb',
+    is_flag=True,
+    help='build deb package',
+    type=click.BOOL,
+    default=False)
+@click.argument(
+    'specfile',
+    type=click.File(mode='r', encoding='UTF-8'))
+def package(content, specfile, workdir, rpm, deb):
+    spec = _load_spec(specfile)
+    nfpm.build_package(content, spec, workdir, rpm, deb)
+
+
+def _load_spec(specfile):
+    try:
+        cli_logger.info(u"using {} as specfile".format(specfile.name))
+        return yaml.safe_load(specfile)
+    except:
+        cli_logger.critical(u"error loading specfile {}"
+                                .format(specfile.name),
+                            exc_info=True)
+    finally:
+        specfile.close()
 
 
 if __name__ == "__main__":

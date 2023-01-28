@@ -70,3 +70,5 @@ tmp*/
 # Eclipse Package
 eclipse-java-extra-*.tar.gz
 
+*.rpm
+*.deb
