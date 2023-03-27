@@ -8,4 +8,4 @@ eclipse-builder = {extras = ["test", "dev"], path = "."}
 
 [packages]
 setuptools = ">= 64.0.0"
-eclipse-builder = {path = "."}
+eclipse-builder = {editable = true, path = "."}

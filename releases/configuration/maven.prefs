@@ -5,4 +5,4 @@
 org.eclipse.m2e.core/eclipse.m2.updateIndexes=false
 org.eclipse.m2e.core/eclipse.m2.updateProjects=true
 org.eclipse.m2e.core/eclipse.m2.defaultPomEditorPage=true
-org.jboss.tools.maven.apt/org.jboss.tools.maven.apt.mode=maven_execution
+org.eclipse.m2e.apt/org.eclipse.m2e.apt.mode=maven_execution

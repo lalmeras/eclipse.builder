@@ -14,7 +14,6 @@ arch: amd64
 platform: linux
 version: {package_version}
 version_schema: none
-release: 1
 section: default
 maintainer: laurent.almeras@kobalt.fr
 description: Eclipse IDE
@@ -54,8 +53,6 @@ def build_package(content: str, spec: dict[str, str], workdir: pathlib.Path, rpm
             desktop_vm="-vm {0}".format(vm) if (vm := _check_dict(spec, "desktop", "vm")) else "",
             desktop_vm_args="-vmargs {0}".format(vm_args) if (vm_args := _check_dict(spec, "desktop", "vm-args")) else ""
         ))
-    import pdb
-    pdb.set_trace()
     for package in packages:
         command = ['nfpm', 'pkg']
         command.extend(["--packager", package])

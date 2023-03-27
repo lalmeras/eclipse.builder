@@ -1,0 +1,53 @@
+---
+url: https://mirror.dogado.de/eclipse/technology/epp/downloads/release/2023-03/R/eclipse-jee-2023-03-R-linux-gtk-x86_64.tar.gz
+filename: eclipse-java-extra-2023-03a-linux-gtk-x86_64.tar.gz
+basename: eclipse-java-extra-2023-03a-linux-gtk
+version: 2023.03a
+desktop:
+  vm:
+  vm-args: -Xmx2g
+repository:
+  # rpm is pushed to this url
+  # set login:password in RPM_CREDENTIALS
+  rpm: https://nexus.tools.kobalt.fr/repository/eclipse-rpm/
+
+features:
+  - org.eclipse.wst.server_adapters.feature.feature.group
+  - org.eclipse.jst.server_ui.feature.feature.group
+  - org.eclipse.jst.server_adapters.ext.feature.feature.group
+  - org.eclipse.jst.server_adapters.feature.feature.group
+  - org.eclipse.jsf.feature.feature.group
+  - org.eclipse.wst.xsl.feature.feature.group
+  - org.eclipse.wst.web_ui.feature.feature.group
+  - org.eclipse.jst.web_ui.feature.feature.group
+  - org.eclipse.jst.enterprise_ui.feature.feature.group
+  - org.eclipse.jst.common.fproj.enablement.jdt.feature.group
+  - org.eclipse.wst.common.fproj.feature.group
+  - org.eclipse.datatools.sqldevtools.feature.feature.group
+  - org.eclipse.egit
+  - org.eclipse.buildship.feature.group
+  - org.eclipse.m2e.feature.feature.group
+  - org.eclipse.m2e.logback.feature.feature.group
+  - org.eclipse.m2e.wtp.feature.feature.group
+  - fr.openwide.eclipse.plugins.m2e.derived.feature.feature.group
+  - org.sonarlint.eclipse.feature.feature.group
+  - org.eclipse.oomph.setup.git.feature.group
+  - org.eclipse.oomph.setup.jdt.feature.group
+  - org.eclipse.oomph.setup.maven.feature.group
+  - org.eclipse.oomph.setup.pde.feature.group
+  - org.eclipse.oomph.setup.targlets.feature.group
+  - org.eclipse.oomph.setup.workingsets.feature.group
+  - org.eclipse.oomph.targlets.feature.group
+  - com.genuitec.eclipse.theming.designer.feature.feature.group
+  - com.deepnoodle.openeditors.feature.feature.group
+
+repositories:
+  - https://download.eclipse.org/releases/2023-03/
+  - https://download.eclipse.org/eclipse/updates/4.27/
+  - https://nexus.tools.kobalt.fr/repository/eclipse-m2e-derived/
+  - https://binaries.sonarsource.com/SonarLint-for-Eclipse/releases/7.9.0.66038/
+  - https://www.genuitec.com/updates/devstyle/ci/
+  - https://raw.githubusercontent.com/dbickley/OpenEditors/release/updatesite/
+
+prefs:
+  - configuration/*.prefs

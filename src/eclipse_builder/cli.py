@@ -18,6 +18,7 @@ from . import util
 from . import feature
 from . import prefs
 from . import nfpm
+from . import publish
 
 
 def bootstrap():
@@ -89,11 +90,18 @@ def main(verbose):
     help='build deb package',
     type=click.BOOL,
     default=False)
+@click.option(
+    '--publish',
+    'publish_package',
+    is_flag=True,
+    help='publish package',
+    type=click.BOOL,
+    default=False)
 @click.argument(
     'specfile',
     type=click.File(mode='r', encoding='UTF-8'))
 def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
-        rpm: bool, deb: bool):
+        rpm: bool, deb: bool, publish_package: bool):
     """
     Console script for eclipse_builder.
 
@@ -129,6 +137,9 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
     if rpm or deb:
         cli_logger.info(u"packaging...")
         nfpm.build_package(target, spec, workdir, rpm, deb)
+    if publish_package and rpm:
+        cli_logger.info(u"publishing...")
+        publish.publish_package(spec)
 
 
 @main.command()
