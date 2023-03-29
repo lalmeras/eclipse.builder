@@ -107,11 +107,13 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
 
     * SPECFILE is yml description of the release.
     """
+    if not os.path.exists("dist"):
+        os.makedirs("dist")
     spec = _load_spec(specfile)
     cli_logger.info(u"downloading {}".format(spec['url']))
     archive = util.download(workdir, spec['url'])
     tar = tarfile.open(fileobj=archive)
-    target = tempfile.mkdtemp(dir=workdir)
+    target = tempfile.mkdtemp()
     try:
         util.extract(tar, target)
     finally:
@@ -133,13 +135,13 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
                 os.remove(item_path)
         else:
             print('{} protected'.format(content_item))
-    util.archive(target, spec['basename'], spec['filename'])
+    util.archive(target, spec['basename'], os.path.join("dist", spec['filename']))
     if rpm or deb:
         cli_logger.info(u"packaging...")
-        nfpm.build_package(target, spec, workdir, rpm, deb)
+        nfpm.build_package(target, spec, pathlib.Path("dist"), rpm, deb)
     if publish_package and rpm:
         cli_logger.info(u"publishing...")
-        publish.publish_package(spec)
+        publish.publish_package(pathlib.Path("dist") / "eclipse-{}.x86_64.rpm".format(spec["version"]), spec)
 
 
 @main.command()

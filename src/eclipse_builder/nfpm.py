@@ -40,7 +40,7 @@ Icon=/opt/{package_basename}/icon.xpm
 """
 
 
-def build_package(content: str, spec: dict[str, str], workdir: pathlib.Path, rpm: bool, deb: bool):
+def build_package(content: str, spec: dict[str, str], target_dir: pathlib.Path, rpm: bool, deb: bool):
     packages = []
     deb and packages.append("deb")
     rpm and packages.append("rpm")
@@ -56,7 +56,7 @@ def build_package(content: str, spec: dict[str, str], workdir: pathlib.Path, rpm
     for package in packages:
         command = ['nfpm', 'pkg']
         command.extend(["--packager", package])
-        command.extend(["--target", "."])
+        command.extend(["--target", str(target_dir)])
         with io.open(tempfile.mktemp(suffix=".yaml"), mode="w", encoding="utf-8") as config_file:
             config_file.write(NFPM_YAML.format(
                 package_name="eclipse",
