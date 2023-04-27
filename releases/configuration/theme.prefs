@@ -1,3 +1,0 @@
-# la définition du thème ici ne fonctionne pas du tout : en fait, on surcharge la CSS directement dans les sources
-org.eclipse.e4.ui.css.swt.theme/themeid=org.eclipse.e4.ui.css.theme.e4_classic
-org.eclipse.ui/ENABLE_ANIMATIONS=false
