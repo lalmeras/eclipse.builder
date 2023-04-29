@@ -21,6 +21,7 @@ pipenv run eclipse-builder eclipse [RELEASE_FILE]
 # build, rpm and publish on repository
 # need 'version' in release file
 # need 'repository.rpm' in release file
+# need RPM_CREDENTIALS environment variable
 pipenv run eclipse-builder eclipse --rpm --publish [RELEASE_FILE]
 ```
 

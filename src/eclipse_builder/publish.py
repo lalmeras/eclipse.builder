@@ -20,8 +20,10 @@ def publish_package(artifact: pathlib.Path, spec: dict[str, str]):
     if not artifact.exists():
         raise Exception("File {} is missing", artifact)
     target = urllib.parse.urljoin(spec["repository"]["rpm"], os.path.basename(artifact))
+    length = os.stat(artifact).st_size
     auth = requests.auth.HTTPBasicAuth(login, password)
     print("Pushing to {}".format(target))
     with open(artifact, mode = "rb") as f:
-        requests.put(target, auth=auth, stream=f)
-    
+        response = requests.put(target, headers={"Content-Length": str(length)}, auth=auth, data=f)
+        response.raise_for_status()
+
