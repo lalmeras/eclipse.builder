@@ -27,7 +27,7 @@ classifiers = [
 ]
 dependencies = [
   "Click==8.0.4",
-  "requests==2.28.2",
+  "requests==2.31.0",
   "requests-testadapter==0.3.0",
   "cachecontrol[filecache]==0.12.11",
   "lockfile==0.12.2",
