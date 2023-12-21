@@ -32,7 +32,7 @@ dependencies = [
   "cachecontrol[filecache]==0.12.11",
   "lockfile==0.12.2",
   "coloredlogs==15.0",
-  "pyyaml==5.4.1"
+  "pyyaml==6.0.1"
 ]
 
 [[project.authors]]

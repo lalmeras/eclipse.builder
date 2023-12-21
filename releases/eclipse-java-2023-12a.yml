@@ -1,7 +1,7 @@
-url: https://mirror.dogado.de/eclipse/technology/epp/downloads/release/2023-09/R/eclipse-jee-2023-09-R-linux-gtk-x86_64.tar.gz
-filename: eclipse-java-extra-2023-09a-linux-gtk-x86_64.tar.gz
-basename: eclipse-java-extra-2023-09a-linux-gtk
-version: 2023.09a
+url: https://mirror.dogado.de/eclipse/technology/epp/downloads/release/2023-12/R/eclipse-jee-2023-12-R-linux-gtk-x86_64.tar.gz
+filename: eclipse-java-extra-2023-12a-linux-gtk-x86_64.tar.gz
+basename: eclipse-java-extra-2023-12a-linux-gtk
+version: 2023.12a
 desktop:
   vm:
   vm-args: -Xmx2g
@@ -42,11 +42,11 @@ features:
 
 # sonar: check https://binaries.sonarsource.com/?prefix=SonarLint-for-Eclipse/releases/
 repositories:
-- https://download.eclipse.org/releases/2023-09/
-- https://download.eclipse.org/eclipse/updates/4.29/
-- https://download.eclipse.org/technology/m2e/releases/2.1.2/
+- https://download.eclipse.org/releases/2023-12/
+- https://download.eclipse.org/eclipse/updates/4.30/
+- https://download.eclipse.org/technology/m2e/releases/2.5.0/
 - https://nexus.tools.kobalt.fr/repository/eclipse-m2e-derived/
-- https://binaries.sonarsource.com/SonarLint-for-Eclipse/releases/8.0.0.80157/
+- https://binaries.sonarsource.com/SonarLint-for-Eclipse/releases/9.2.0.81471/
 - https://www.genuitec.com/updates/devstyle/ci/
 - https://raw.githubusercontent.com/dbickley/OpenEditors/release/updatesite/
 
