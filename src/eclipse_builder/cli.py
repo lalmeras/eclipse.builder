@@ -113,7 +113,10 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
     cli_logger.info(u"downloading {}".format(spec['url']))
     archive = util.download(workdir, spec['url'])
     tar = tarfile.open(fileobj=archive)
-    target = tempfile.mkdtemp()
+    temp_dir = tempfile.mkdtemp()
+    # use a subfolder as temp_dir has very restrictive permissions
+    target = os.path.join(temp_dir, "build")
+    os.mkdir(target)
     try:
         util.extract(tar, target)
     finally:

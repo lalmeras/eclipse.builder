@@ -23,6 +23,7 @@ license: Apache 2.0
 contents:
   - src: {package_content}
     dst: /opt/{package_basename}
+    type: tree
   - src: /opt/{package_basename}/eclipse
     dst: /usr/bin/{package_basename}
     type: symlink
