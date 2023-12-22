@@ -37,7 +37,7 @@ features:
 - org.eclipse.oomph.setup.targlets.feature.group
 - org.eclipse.oomph.setup.workingsets.feature.group
 - org.eclipse.oomph.targlets.feature.group
-- com.genuitec.eclipse.theming.designer.feature.feature.group
+- com.genuitec.eclipse.theming.core.feature.feature.group
 - com.deepnoodle.openeditors.feature.feature.group
 
 # sonar: check https://binaries.sonarsource.com/?prefix=SonarLint-for-Eclipse/releases/
@@ -49,6 +49,8 @@ repositories:
 - https://binaries.sonarsource.com/SonarLint-for-Eclipse/releases/9.2.0.81471/
 - https://www.genuitec.com/updates/devstyle/ci/
 - https://raw.githubusercontent.com/dbickley/OpenEditors/release/updatesite/
+# Needed for org.w3c.css.sac plugin; needed by devstyle, removed from 4.30
+- https://download.eclipse.org/eclipse/updates/4.29/
 
 prefs:
 - configuration/*.prefs
