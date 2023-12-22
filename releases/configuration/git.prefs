@@ -1,0 +1,2 @@
+# this is an issue as we mark submodules derived
+org.eclipse.egit.core/core_autoIgnoreDerivedResources=false

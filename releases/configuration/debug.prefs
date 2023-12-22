@@ -1,0 +1,2 @@
+# this conflicts with maven source resolution
+org.eclipse.jdt.debug/org.eclipse.jdt.debug.enable_advanced_sourcelookup=false
