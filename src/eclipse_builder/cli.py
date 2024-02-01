@@ -14,6 +14,7 @@ import click
 import coloredlogs
 import yaml
 
+from . import dropins
 from . import util
 from . import feature
 from . import prefs
@@ -123,6 +124,7 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
         tar.close()
     configuration_folder = os.path.join(target, 'configuration')
     configuration_protect = os.listdir(configuration_folder)
+    dropins.install_dropins(temp_dir, target, spec.get("dropins", []))
     feature.install_features(target, spec['features'], spec['repositories'],
                              proxy_host=proxy_host, proxy_port=proxy_port,
                              java_home=java_home)

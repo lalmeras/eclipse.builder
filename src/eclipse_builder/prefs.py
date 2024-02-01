@@ -11,7 +11,18 @@ import xml.etree.ElementTree as ET
 import zipfile
 
 
+GOOGLE_JAVA_FORMAT_OPENS = [
+    "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+    "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+    "--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+    "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+    "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+    "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+]
+
+
 def install_preferences(eclipse_home, conf_path, prefs):
+    # open eclipse.ini to find product and perform modifications
     eclipse_ini_path = os.path.join(eclipse_home, 'eclipse.ini')
     with open(eclipse_ini_path, 'r') as eclipse_ini_file:
         eclipse_ini = eclipse_ini_file.readlines()
@@ -40,6 +51,19 @@ def install_preferences(eclipse_home, conf_path, prefs):
     if len(matches) != 1:
         raise Exception('Product folder {} not found'.format(product_match))
     match = matches[0]
+
+    # add options needed by google-java-format plugin
+    vmargs_index = eclipse_ini.index('-vmargs\n')
+    if vmargs_index == -1:
+        raise Exception("vmargs line not found in eclipse.ini")
+    else:
+        for opt in GOOGLE_JAVA_FORMAT_OPENS:
+            eclipse_ini.insert(vmargs_index + 1, opt + "\n")
+
+    # write back eclipse.ini
+    with open(eclipse_ini_path, 'w', encoding="utf-8") as eclipse_ini_file:
+        eclipse_ini_file.writelines(eclipse_ini)
+        eclipse_ini_file.flush()
 
     with open(match, 'a') as plugin_customization:
         for pref in prefs:

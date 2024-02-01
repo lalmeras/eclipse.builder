@@ -9,6 +9,8 @@ repository:
   # rpm is pushed to this url
   # set login:password in RPM_CREDENTIALS
   rpm: https://nexus.tools.kobalt.fr/repository/eclipse-rpm/
+dropins:
+  - https://github.com/google/google-java-format/releases/download/v1.19.2/google-java-format-eclipse-plugin-1.19.2.jar
 
 features:
 - org.eclipse.wst.server_adapters.feature.feature.group
