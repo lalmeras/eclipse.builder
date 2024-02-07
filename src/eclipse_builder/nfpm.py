@@ -22,9 +22,9 @@ homepage: https://eclipse.org
 license: Apache 2.0
 contents:
   - src: {package_content}
-    dst: /opt/{package_basename}
+    dst: /data/opt/{package_basename}
     type: tree
-  - src: /opt/{package_basename}/eclipse
+  - src: /data/opt/{package_basename}/eclipse
     dst: /usr/bin/{package_basename}
     type: symlink
   - src: {desktop_file}
@@ -37,7 +37,7 @@ Name={desktop_name}
 Exec=env GDK_BACKEND={desktop_gdk_backend} WEBKIT_DISABLE_COMPOSITING_MODE=1 /usr/bin/{package_basename} {desktop_vm} {desktop_vm_args}
 Type=Application
 Description={desktop_description}
-Icon=/opt/{package_basename}/icon.xpm
+Icon=/data/opt/{package_basename}/icon.xpm
 """
 
 
