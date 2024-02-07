@@ -34,7 +34,7 @@ contents:
 NFPM_DESKTOP = """
 [Desktop Entry]
 Name={desktop_name}
-Exec=env GDK_BACKEND={desktop_gdk_backend} WEBKIT_DISABLE_COMPOSITING_BACKEND_MODE=1 /usr/bin/{package_basename} {desktop_vm} {desktop_vm_args}
+Exec=env GDK_BACKEND={desktop_gdk_backend} WEBKIT_DISABLE_COMPOSITING_MODE=1 /usr/bin/{package_basename} {desktop_vm} {desktop_vm_args}
 Type=Application
 Description={desktop_description}
 Icon=/opt/{package_basename}/icon.xpm
