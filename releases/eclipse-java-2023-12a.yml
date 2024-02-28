@@ -42,11 +42,16 @@ features:
 - com.genuitec.eclipse.theming.core.feature.feature.group
 - com.deepnoodle.openeditors.feature.feature.group
 
+uninstall_features:
+- org.eclipse.m2e.feature.feature.group
+- org.eclipse.m2e.logback.feature.feature.group
+- org.eclipse.m2e.wtp.feature.feature.group
+
 # sonar: check https://binaries.sonarsource.com/?prefix=SonarLint-for-Eclipse/releases/
 repositories:
 - https://download.eclipse.org/releases/2023-12/
 - https://download.eclipse.org/eclipse/updates/4.30/
-- https://download.eclipse.org/technology/m2e/releases/2.5.0/
+- https://download.eclipse.org/technology/m2e/releases/latest/
 - https://nexus.tools.kobalt.fr/repository/eclipse-m2e-derived/
 - https://binaries.sonarsource.com/SonarLint-for-Eclipse/releases/9.2.0.81471/
 - https://www.genuitec.com/updates/devstyle/ci/

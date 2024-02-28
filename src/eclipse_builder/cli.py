@@ -125,8 +125,8 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
     configuration_folder = os.path.join(target, 'configuration')
     configuration_protect = os.listdir(configuration_folder)
     dropins.install_dropins(temp_dir, target, spec.get("dropins", []))
-    feature.install_features(target, spec['features'], spec['repositories'],
-                             proxy_host=proxy_host, proxy_port=proxy_port,
+    feature.install_features(target, spec['features'], spec.get('uninstall_features', []),
+                             spec['repositories'], proxy_host=proxy_host, proxy_port=proxy_port,
                              java_home=java_home)
     prefs.install_preferences(target, os.path.dirname(specfile.name),
                               spec['prefs'])
