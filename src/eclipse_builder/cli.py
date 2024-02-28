@@ -146,7 +146,7 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
         nfpm.build_package(target, spec, pathlib.Path("dist"), rpm, deb)
     if publish_package and rpm:
         cli_logger.info(u"publishing...")
-        publish.publish_package(pathlib.Path("dist") / "eclipse-{}.x86_64.rpm".format(spec["version"]), spec)
+        publish.publish_package(pathlib.Path("dist") / "eclipse-{}-1.x86_64.rpm".format(spec["version"]), spec)
 
 
 @main.command()
