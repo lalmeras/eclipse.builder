@@ -14,7 +14,7 @@ import click
 import coloredlogs
 import yaml
 
-from . import dropins
+from . import dropins, plugins
 from . import util
 from . import feature
 from . import prefs
@@ -125,6 +125,7 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
     configuration_folder = os.path.join(target, 'configuration')
     configuration_protect = os.listdir(configuration_folder)
     dropins.install_dropins(temp_dir, target, spec.get("dropins", []))
+    plugins.install_plugins(temp_dir, target, spec.get("plugins", []))
     feature.install_features(target, spec['features'], spec.get('uninstall_features', []),
                              spec['repositories'], proxy_host=proxy_host, proxy_port=proxy_port,
                              java_home=java_home)
@@ -141,12 +142,13 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
         else:
             print('{} protected'.format(content_item))
     util.archive(target, spec['basename'], os.path.join("dist", spec['filename']))
+    package_name = spec.get("package-name", "eclipse")
     if rpm or deb:
         cli_logger.info(u"packaging...")
-        nfpm.build_package(target, spec, pathlib.Path("dist"), rpm, deb)
+        nfpm.build_package(package_name, target, spec, pathlib.Path("dist"), rpm, deb)
     if publish_package and rpm:
         cli_logger.info(u"publishing...")
-        publish.publish_package(pathlib.Path("dist") / "eclipse-{}-1.x86_64.rpm".format(spec["version"]), spec)
+        publish.publish_package(pathlib.Path("dist") / f"{package_name}-{spec["version"]}-1.x86_64.rpm", spec)
 
 
 @main.command()
