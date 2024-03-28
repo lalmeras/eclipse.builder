@@ -29,7 +29,7 @@ dependencies = [
   "Click==8.0.4",
   "requests==2.31.0",
   "requests-testadapter==0.3.0",
-  "cachecontrol[filecache]==0.12.11",
+  "cachecontrol[filecache]==0.14.0",
   "lockfile==0.12.2",
   "coloredlogs==15.0",
   "pyyaml==6.0.1"
