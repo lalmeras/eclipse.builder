@@ -6,7 +6,7 @@ url: https://eclipse.mirror.garr.it/technology/epp/downloads/release/2024-06/R/e
 filename: eclipse-java-extra-2024-06a-linux-gtk-x86_64.tar.gz
 basename: eclipse-java-extra-2024-06a-linux-gtk
 version: 2024.06a
-package-name: eclipse-next
+package-name: eclipse
 desktop:
   vm:
   vm-args: -Xmx2g
