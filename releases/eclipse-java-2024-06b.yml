@@ -1,0 +1,71 @@
+## Formatter Google
+## https://github.com/google/styleguide/blob/8487c083e1faecb1259be8a8873618cfdb69d33d/eclipse-java-google-style.xml
+##
+
+url: https://eclipse.mirror.garr.it/technology/epp/downloads/release/2024-06/R/eclipse-jee-2024-06-R-linux-gtk-x86_64.tar.gz
+filename: eclipse-java-extra-2024-06b-linux-gtk-x86_64.tar.gz
+basename: eclipse-java-extra-2024-06b-linux-gtk
+version: 2024.06b
+package-name: eclipse
+desktop:
+  vm:
+  vm-args: -Xmx2g
+repository:
+  # rpm is pushed to this url
+  # set login:password in RPM_CREDENTIALS
+  rpm: https://nexus.tools.kobalt.fr/repository/eclipse-rpm/
+dropins:
+  - https://github.com/google/google-java-format/releases/download/v1.23.0/google-java-format-eclipse-plugin-1.23.0.jar
+plugins:
+  - https://nexus.tools.kobalt.fr/repository/eclipse/swt-wayland/org.eclipse.swt_3.125.0.v20240227-1638.jar
+  - https://nexus.tools.kobalt.fr/repository/eclipse/swt-wayland/org.eclipse.swt.gtk.linux.x86_64_3.125.0.v20240227-1638.jar
+
+features:
+- org.eclipse.wst.server_adapters.feature.feature.group
+- org.eclipse.jst.server_ui.feature.feature.group
+- org.eclipse.jst.server_adapters.ext.feature.feature.group
+- org.eclipse.jst.server_adapters.feature.feature.group
+- org.eclipse.jsf.feature.feature.group
+- org.eclipse.wst.xsl.feature.feature.group
+- org.eclipse.wst.web_ui.feature.feature.group
+- org.eclipse.jst.web_ui.feature.feature.group
+- org.eclipse.jst.enterprise_ui.feature.feature.group
+- org.eclipse.jst.common.fproj.enablement.jdt.feature.group
+- org.eclipse.wst.common.fproj.feature.group
+- org.eclipse.datatools.sqldevtools.feature.feature.group
+- org.eclipse.egit
+- org.eclipse.buildship.feature.group
+- org.eclipse.m2e.feature.feature.group
+- org.eclipse.m2e.logback.feature.feature.group
+- org.eclipse.m2e.wtp.feature.feature.group
+- fr.openwide.eclipse.plugins.m2e.derived.feature.feature.group
+- org.sonarlint.eclipse.feature.feature.group
+- org.eclipse.oomph.setup.git.feature.group
+- org.eclipse.oomph.setup.jdt.feature.group
+- org.eclipse.oomph.setup.maven.feature.group
+- org.eclipse.oomph.setup.pde.feature.group
+- org.eclipse.oomph.setup.targlets.feature.group
+- org.eclipse.oomph.setup.workingsets.feature.group
+- org.eclipse.oomph.targlets.feature.group
+- com.genuitec.eclipse.theming.core.feature.feature.group
+- com.deepnoodle.openeditors.feature.feature.group
+
+uninstall_features:
+- org.eclipse.m2e.feature.feature.group
+- org.eclipse.m2e.logback.feature.feature.group
+- org.eclipse.m2e.wtp.feature.feature.group
+
+# sonar: check https://binaries.sonarsource.com/?prefix=SonarLint-for-Eclipse/releases/
+repositories:
+- https://download.eclipse.org/releases/2024-06/
+- https://download.eclipse.org/eclipse/updates/4.32/
+- https://download.eclipse.org/technology/m2e/releases/latest/
+- https://nexus.tools.kobalt.fr/repository/eclipse-m2e-derived/
+- https://binaries.sonarsource.com/SonarLint-for-Eclipse/releases/9.3.0.81553/
+- https://www.genuitec.com/updates/devstyle/ci/
+- https://raw.githubusercontent.com/dbickley/OpenEditors/release/updatesite/
+# Needed for org.w3c.css.sac plugin; needed by devstyle, removed from 4.30
+- https://download.eclipse.org/eclipse/updates/4.29/
+
+prefs:
+- configuration/*.prefs
