@@ -26,13 +26,13 @@ classifiers = [
   "Programming Language :: Python :: 3.10"
 ]
 dependencies = [
-  "Click==8.0.4",
-  "requests==2.31.0",
+  "Click==8.1.8",
+  "requests==2.32.3",
   "requests-testadapter==0.3.0",
-  "cachecontrol[filecache]==0.14.0",
+  "cachecontrol[filecache]==0.14.2",
   "lockfile==0.12.2",
-  "coloredlogs==15.0",
-  "pyyaml==6.0.1"
+  "coloredlogs==15.0.1",
+  "pyyaml==6.0.2"
 ]
 
 [[project.authors]]
