@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 """Console script for eclipse_builder."""
-from __future__ import print_function
 
 import logging
 import os
@@ -8,18 +6,12 @@ import pathlib
 import shutil
 import tarfile
 import tempfile
-import sys
 
 import click
 import coloredlogs
 import yaml
 
-from . import dropins, plugins
-from . import util
-from . import feature
-from . import prefs
-from . import nfpm
-from . import publish
+from . import dropins, feature, nfpm, plugins, prefs, publish, util
 
 
 def bootstrap():
@@ -34,7 +26,7 @@ def bootstrap():
     coloredlogs.install(level='DEBUG', logger=logger, fmt=logger_format)
     coloredlogs.install(level='DEBUG', logger=stdout, fmt=stdout_format)
     coloredlogs.install(level='DEBUG', logger=raw, fmt=raw_format)
-    logger.setLevel(logging.WARN)
+    logger.setLevel(logging.WARNING)
     stdout.setLevel(logging.INFO)
     raw.setLevel(logging.INFO)
     return logger, stdout, raw
@@ -43,7 +35,7 @@ def bootstrap():
 (root_logger, cli_logger, raw_logger) = bootstrap()
 
 
-@click.group()
+@click.group(name="eclipse-builder")
 @click.option(
     '-v', '--verbose', count=True
 )
@@ -111,7 +103,7 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
     if not os.path.exists("dist"):
         os.makedirs("dist")
     spec = _load_spec(specfile)
-    cli_logger.info(u"downloading {}".format(spec['url']))
+    cli_logger.info("downloading {}".format(spec['url']))
     archive = util.download(workdir, spec['url'])
     tar = tarfile.open(fileobj=archive)
     temp_dir = tempfile.mkdtemp()
@@ -140,14 +132,14 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
             else:
                 os.remove(item_path)
         else:
-            print('{} protected'.format(content_item))
+            print(f'{content_item} protected')
     util.archive(target, spec['basename'], os.path.join("dist", spec['filename']))
     package_name = spec.get("package-name", "eclipse")
     if rpm or deb:
-        cli_logger.info(u"packaging...")
+        cli_logger.info("packaging...")
         nfpm.build_package(package_name, target, spec, pathlib.Path("dist"), rpm, deb)
     if publish_package and rpm:
-        cli_logger.info(u"publishing...")
+        cli_logger.info("publishing...")
         publish.publish_package(pathlib.Path("dist") / f"{package_name}-{spec["version"]}-1.x86_64.rpm", spec)
 
 
@@ -189,11 +181,10 @@ def package(content, specfile, workdir, rpm, deb):
 
 def _load_spec(specfile):
     try:
-        cli_logger.info(u"using {} as specfile".format(specfile.name))
+        cli_logger.info(f"using {specfile.name} as specfile")
         return yaml.safe_load(specfile)
     except:
-        cli_logger.critical(u"error loading specfile {}"
-                                .format(specfile.name),
+        cli_logger.critical(f"error loading specfile {specfile.name}",
                             exc_info=True)
     finally:
         specfile.close()

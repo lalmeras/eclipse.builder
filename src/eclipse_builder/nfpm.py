@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
 
-import io
 import pathlib
 import subprocess
 import tempfile
-
-from . import util
-
 
 NFPM_YAML = """
 name: {package_name}
@@ -45,19 +40,19 @@ def build_package(package_name: str, content: str, spec: dict[str, str], target_
     packages = []
     deb and packages.append("deb")
     rpm and packages.append("rpm")
-    with io.open(tempfile.mktemp(suffix=".yaml"), mode="w", encoding="utf-8") as desktop_file:
+    with open(tempfile.mktemp(suffix=".yaml"), mode="w", encoding="utf-8") as desktop_file:
         desktop_file.write(NFPM_DESKTOP.format(
             desktop_name="Eclipse {0}".format(spec["version"]),
             desktop_description="Eclipse {0}".format(spec["version"]),
             package_basename=spec["basename"],
-            desktop_vm="-vm {0}".format(vm) if (vm := _check_dict(spec, "desktop", "vm")) else "",
-            desktop_vm_args="-vmargs {0}".format(vm_args) if (vm_args := _check_dict(spec, "desktop", "vm-args")) else ""
+            desktop_vm=f"-vm {vm}" if (vm := _check_dict(spec, "desktop", "vm")) else "",
+            desktop_vm_args=f"-vmargs {vm_args}" if (vm_args := _check_dict(spec, "desktop", "vm-args")) else ""
         ))
     for package in packages:
         command = ['nfpm', 'pkg']
         command.extend(["--packager", package])
         command.extend(["--target", str(target_dir)])
-        with io.open(tempfile.mktemp(suffix=".yaml"), mode="w", encoding="utf-8") as config_file:
+        with open(tempfile.mktemp(suffix=".yaml"), mode="w", encoding="utf-8") as config_file:
             config_file.write(NFPM_YAML.format(
                 package_name=package_name,
                 package_version=spec["version"],

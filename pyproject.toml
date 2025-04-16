@@ -1,15 +1,13 @@
 [build-system]
-requires = [
-  "setuptools >= 64.0.0"
-]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "eclipse_builder"
 description = "Helpers to build custom Eclipse packages"
 readme = "README.md"
 dynamic = ["version"]
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 license = {text = "BSD 3-Clause License"}
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -20,10 +18,11 @@ classifiers = [
   "Topic :: Utilities",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.7",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10"
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13"
 ]
 dependencies = [
   "Click==8.1.8",
@@ -67,92 +66,36 @@ dev = [
 [project.scripts]
 eclipse-builder = "eclipse_builder.cli:main"
 
-[tools.setuptools]
-zip-safe = true
-py-modules = ["eclipse_builder"]
+[tool.hatch.version]
+path = "src/eclipse_builder/__init__.py"
 
-[tool.setuptools.dynamic]
-version = {attr = "eclipse_builder.__version__"}
-
-[tool.pytest.ini_options]
-minversion = "7.1"
-addopts = "--cov-config .coveragerc --cov-report=xml --cov=."
-testpaths = [
-    "tests"
+[tool.hatch.envs.default]
+dependencies = [
+  "coverage[toml]>=6.5",
+  "pytest",
+]
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = [
+  "- coverage combine",
+  "coverage report",
+]
+cov = [
+  "test-cov",
+  "cov-report",
 ]
 
-[tool.tox]
-legacy_tox_ini = """
-[tox]
-envlist = py{37,38,39,310},pipenv,mypy,pylint
-isolated_build = True
-[gh-actions]
-python =
-    3.7: py37
-    3.8: py38
-    3.9: py39
-    3.10: py310, pylint, mypy
-[testenv]
-setenv =
-    LC_ALL = en_US.utf-8
-    LANG = en_US.utf-8
-# use pipenv venv
-[pipenv]
-commands =
-    pipenv run pytest {posargs}
-[py]
-deps =
-    pytest
-    pytest-cov
-commands =
-    pytest --cov-fail-under 100 {posargs}
-[testenv:pipenv]
-deps =
-    pipenv
-setenv =
-    PIPENV_IGNORE_VIRTUALENVS = 0
-commands = {[pipenv]commands}
-[testenv:py{37,38,39,310}]
-deps = {[py]deps}
-commands = {[py]commands}
-[testenv:mypy]
-deps =
-    mypy
-commands =
-    mypy --config-file pyproject.toml
-[testenv:pylint]
-deps =
-    pylint
-commands =
-    pylint eclipse_builder
-"""
+[tool.hatch.envs.types]
+dependencies = [
+  "mypy>=1.0.0",
+  "types-requests"
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/}"
 
 [tool.mypy]
-python_version = "3.7"
+python_version = "3.12"
 warn_return_any = true
 warn_unused_configs = true
 files = "eclipse_builder/**/*.py"
-
-[[tool.mypy.overrides]]
-module = []
-ignore_missing_imports = true
-
-[tool.tbump.version]
-current = "0.4.0"
-regex = '''
-  (?P<major>\d+)
-  \.
-  (?P<minor>\d+)
-  \.
-  (?P<patch>\d+)
-  (\.
-  (?P<extra>dev\d+)
-  )?
-'''
-
-[tool.tbump.git]
-message_template = "Bump to {new_version}"
-tag_template = "v{new_version}"
-
-[[tool.tbump.file]]
-src = "src/eclipse_builder/__init__.py"

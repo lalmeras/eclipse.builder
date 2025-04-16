@@ -1,12 +1,9 @@
 #! /bin/env python
 """Plugin installed"""
-from __future__ import print_function
 
 import os.path
 import subprocess
-import sys
 import tempfile
-
 
 # eclipse 2022-03: httpclient is verbose if logback is not set
 LOGBACK_CONFIGURATION = """<configuration>
@@ -49,7 +46,7 @@ def _install_features(logback_file, eclipse_home, features, uninstall_features,
             '-Dhttps.proxyPort=%s' % (proxy_port,)
         ])
     if logback_file:
-        vmargs.append('-Dlogback.configurationFile={}'.format(logback_file))
+        vmargs.append(f'-Dlogback.configurationFile={logback_file}')
     if java_home:
         vm.extend([
             '-vm', os.path.join(java_home, 'bin', 'java')

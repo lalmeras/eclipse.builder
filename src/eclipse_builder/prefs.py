@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 """Helpers to install preferences."""
-from __future__ import print_function
 
 import glob
 import os
@@ -9,7 +7,6 @@ import subprocess
 import tempfile
 import xml.etree.ElementTree as ET
 import zipfile
-
 
 GOOGLE_JAVA_FORMAT_OPENS = [
     "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
@@ -24,7 +21,7 @@ GOOGLE_JAVA_FORMAT_OPENS = [
 def install_preferences(eclipse_home, conf_path, prefs):
     # open eclipse.ini to find product and perform modifications
     eclipse_ini_path = os.path.join(eclipse_home, 'eclipse.ini')
-    with open(eclipse_ini_path, 'r') as eclipse_ini_file:
+    with open(eclipse_ini_path) as eclipse_ini_file:
         eclipse_ini = eclipse_ini_file.readlines()
     product_line = False
     product = None
@@ -41,15 +38,14 @@ def install_preferences(eclipse_home, conf_path, prefs):
         raise Exception('Eclipse product does not end with .product')
     product_match = product[0:-len('.product')]
     plugins = ET.parse(os.path.join(eclipse_home, 'artifacts.xml'))
-    products = plugins.findall("./artifacts/artifact[@id='{}']"
-                               .format(product_match))
+    products = plugins.findall(f"./artifacts/artifact[@id='{product_match}']")
     if not products:
-        raise Exception('Product xml {} not found'.format(product_match))
+        raise Exception(f'Product xml {product_match} not found')
     folder_match = '{}_{}'.format(product_match, products[0].get('version'))
     matches = glob.glob(os.path.join(eclipse_home, 'plugins', folder_match,
                                      'plugin_customization.ini'))
     if len(matches) != 1:
-        raise Exception('Product folder {} not found'.format(product_match))
+        raise Exception(f'Product folder {product_match} not found')
     match = matches[0]
 
     # add options needed by google-java-format plugin
@@ -71,23 +67,22 @@ def install_preferences(eclipse_home, conf_path, prefs):
             pref_matches = glob.glob(pref_path)
             for pref_match in pref_matches:
                 if os.path.isfile(pref_match):
-                    with open(pref_match, 'r') as pref_file:
+                    with open(pref_match) as pref_file:
                         shutil.copyfileobj(pref_file, plugin_customization)
                         plugin_customization.write('\n')
                     plugin_customization.flush()
                 else:
-                    print('{} not found, ignored'.format(pref_match))
+                    print(f'{pref_match} not found, ignored')
 
     jdt_core_jar = 'org.eclipse.jdt.core'
-    jdt_core_jar_el = plugins.findall("./artifacts/artifact[@id='{}']"
-                                      .format(jdt_core_jar))
+    jdt_core_jar_el = plugins.findall(f"./artifacts/artifact[@id='{jdt_core_jar}']")
     if not jdt_core_jar_el:
         print('jdt_core_jar not found')
         return
     jdt_pattern = '{}_{}.jar'.format(jdt_core_jar, jdt_core_jar_el[0].get('version'))
     jdt_matches = glob.glob(os.path.join(eclipse_home, 'plugins', jdt_pattern))
     if len(jdt_matches) != 1:
-        print('{} candidate(s) found for jdt core, aborting'.format(len(jdt_matches)))
+        print(f'{len(jdt_matches)} candidate(s) found for jdt core, aborting')
         return
     with zipfile.ZipFile(jdt_matches[0], mode='r') as jar:
         plugin_xml_info = jar.getinfo('plugin.xml')

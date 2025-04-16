@@ -7,22 +7,14 @@ Helpers to build custom Eclipse packages
 ## Build and run
 
 ```
-sudo dnf install python3-build
-sudo dnf install pipenv
-
-# build only
-python -m build
-
-# run with pipenv
-pipenv --rm
-pipenv install
-pipenv run eclipse-builder eclipse [RELEASE_FILE]
+pipx install hatch
+hatch run eclipse-builder eclipse [RELEASE_FILE]
 
 # build, rpm and publish on repository
 # need 'version' in release file
 # need 'repository.rpm' in release file
 # need RPM_CREDENTIALS environment variable
-pipenv run eclipse-builder eclipse --rpm --publish [RELEASE_FILE]
+hatch run eclipse-builder eclipse --rpm --publish [RELEASE_FILE]
 ```
 
 ## History

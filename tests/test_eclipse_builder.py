@@ -1,13 +1,12 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Tests for `eclipse_builder` package."""
 
 
 import unittest
+
 from click.testing import CliRunner
 
-from eclipse_builder import eclipse_builder
 from eclipse_builder import cli
 
 
@@ -28,7 +27,7 @@ class TestEclipse_builder(unittest.TestCase):
         runner = CliRunner()
         result = runner.invoke(cli.main)
         assert result.exit_code == 0
-        assert 'eclipse_builder.cli.main' in result.output
+        assert 'Usage: eclipse-builder [OPTIONS]' in result.output
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
-        assert '--help  Show this message and exit.' in help_result.output
+        assert '--help         Show this message and exit.' in help_result.output
