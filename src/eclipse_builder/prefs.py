@@ -18,7 +18,7 @@ GOOGLE_JAVA_FORMAT_OPENS = [
 ]
 
 
-def install_preferences(eclipse_home, conf_path, prefs):
+def install_preferences(eclipse_home, conf_path, prefs, lombok):
     # open eclipse.ini to find product and perform modifications
     eclipse_ini_path = os.path.join(eclipse_home, 'eclipse.ini')
     with open(eclipse_ini_path) as eclipse_ini_file:
@@ -55,6 +55,9 @@ def install_preferences(eclipse_home, conf_path, prefs):
     else:
         for opt in GOOGLE_JAVA_FORMAT_OPENS:
             eclipse_ini.insert(vmargs_index + 1, opt + "\n")
+        if lombok:
+            jar_file = os.path.basename(lombok)
+            eclipse_ini.insert(vmargs_index + 1, f"-javaagent:{jar_file}" + "\n")
 
     # write back eclipse.ini
     with open(eclipse_ini_path, 'w', encoding="utf-8") as eclipse_ini_file:

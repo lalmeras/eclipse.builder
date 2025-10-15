@@ -17,6 +17,8 @@ repository:
 dropins:
   - https://github.com/google/google-java-format/releases/download/v1.28.0/google-java-format-eclipse-plugin-1.28.0.jar
 
+lombok: https://repo1.maven.org/maven2/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar
+
 features:
 - org.eclipse.wst.server_adapters.feature.feature.group
 - org.eclipse.jst.server_ui.feature.feature.group

@@ -11,7 +11,7 @@ import click
 import coloredlogs
 import yaml
 
-from . import dropins, feature, nfpm, plugins, prefs, publish, util
+from . import dropins, feature, lombok, nfpm, plugins, prefs, publish, util
 
 
 def bootstrap():
@@ -117,12 +117,13 @@ def eclipse(specfile, workdir: pathlib.Path, java_home, proxy_host, proxy_port,
     configuration_folder = os.path.join(target, 'configuration')
     configuration_protect = os.listdir(configuration_folder)
     dropins.install_dropins(temp_dir, target, spec.get("dropins", []))
+    lombok.install_lombok(temp_dir, target, spec.get("lombok", None))
     plugins.install_plugins(temp_dir, target, spec.get("plugins", []))
     feature.install_features(target, spec['features'], spec.get('uninstall_features', []),
                              spec['repositories'], proxy_host=proxy_host, proxy_port=proxy_port,
                              java_home=java_home)
     prefs.install_preferences(target, os.path.dirname(specfile.name),
-                              spec['prefs'])
+                              spec['prefs'], spec.get("lombok", None))
     configuration_content = os.listdir(configuration_folder)
     for content_item in configuration_content:
         if content_item not in configuration_protect:

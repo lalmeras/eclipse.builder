@@ -30,6 +30,7 @@ NFPM_DESKTOP = """
 [Desktop Entry]
 Name={desktop_name}
 Exec=env WEBKIT_DISABLE_COMPOSITING_MODE=1 /usr/bin/{package_basename} {desktop_vm} {desktop_vm_args}
+Path=/data/opt/{package_basename}
 Type=Application
 Description={desktop_description}
 Icon=/data/opt/{package_basename}/icon.xpm
