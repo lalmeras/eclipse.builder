@@ -46,6 +46,10 @@ features:
 - org.eclipse.oomph.targlets.feature.group
 - com.genuitec.eclipse.theming.core.feature.feature.group
 - com.deepnoodle.openeditors.feature.feature.group
+# Spring Tools Suite
+- org.springframework.tooling.boot.ls.feature.feature.group
+- org.springframework.boot.ide.main.feature.feature.group
+- org.springframework.ide.eclipse.boot.dash.feature.feature.group
 
 uninstall_features:
 - org.eclipse.m2e.feature.feature.group
@@ -61,6 +65,7 @@ repositories:
 - https://binaries.sonarsource.com/SonarLint-for-Eclipse/releases/11.17.0.83113/
 - https://www.genuitec.com/updates/devstyle/ci/
 - https://raw.githubusercontent.com/dbickley/OpenEditors/release/updatesite/
+- https://cdn.spring.io/spring-tools/release/TOOLS/sts4/update/e4.37/
 
 prefs:
 - configuration/*.prefs
