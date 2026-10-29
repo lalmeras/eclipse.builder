@@ -29,7 +29,7 @@ contents:
 NFPM_DESKTOP = """
 [Desktop Entry]
 Name={desktop_name}
-Exec=env WEBKIT_DISABLE_COMPOSITING_MODE=1 /usr/bin/{package_basename} {desktop_vm} {desktop_vm_args}
+Exec=env {desktop_gdk_backend} WEBKIT_DISABLE_COMPOSITING_MODE=1 /usr/bin/{package_basename} {desktop_vm} {desktop_vm_args}
 Path=/data/opt/{package_basename}
 Type=Application
 Description={desktop_description}
@@ -46,6 +46,7 @@ def build_package(package_name: str, content: str, spec: dict[str, str], target_
             desktop_name="Eclipse {0}".format(spec["version"]),
             desktop_description="Eclipse {0}".format(spec["version"]),
             package_basename=spec["basename"],
+            desktop_gdk_backend=f"GDK_BACKEND={gdk_backend}" if (gdk_backend := _check_dict(spec, "desktop", "gdk-backend")) else "",
             desktop_vm=f"-vm {vm}" if (vm := _check_dict(spec, "desktop", "vm")) else "",
             desktop_vm_args=f"-vmargs {vm_args}" if (vm_args := _check_dict(spec, "desktop", "vm-args")) else ""
         ))
