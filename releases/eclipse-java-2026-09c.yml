@@ -15,6 +15,7 @@ repository:
   # rpm is pushed to this url
   # set login:password in RPM_CREDENTIALS
   rpm: https://nexus.tools.kobalt.fr/repository/eclipse-rpm/
+# Vérifier que la 1.38 a le fix pour https://github.com/google/google-java-format/issues/1428
 dropins:
   - https://github.com/google/google-java-format/releases/download/v1.35.0/google-java-format-eclipse-plugin-1.35.0.jar
 
